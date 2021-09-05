@@ -1,9 +1,18 @@
 {
-    "name": "gromit/instagram-plugin",
+    "name": "gromit/oc-instagram-plugin",
     "type": "october-plugin",
-    "description": "No description provided yet...",
+    "description": "Instagram simple integration for OctoberCMS v2",
+    "authors": [
+        {
+            "name": "GromIT Soft",
+            "email": "info@gromi-it.ru"
+        }
+    ],
     "require": {
         "composer/installers": "~1.0",
         "restyler/instagram-php-scraper": "^1.0"
+    },
+    "config": {
+        "preferred-install": "dist"
     }
 }
