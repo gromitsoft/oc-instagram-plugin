@@ -53,7 +53,7 @@ class Account extends Model
 
     use Validation;
 
-    public array $rules = [
+    public $rules = [
         'username'      => 'required',
         'instagram_id'  => 'required',
         'rapid_api_key' => 'required',
