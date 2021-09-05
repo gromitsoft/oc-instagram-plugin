@@ -4,5 +4,9 @@ use GromIT\Instagram\Classes\Dto;
 
 class SyncMediaDto extends Dto
 {
-    public int $account_id;
+
+    /**
+     * @var int $account_id
+     */
+    public $account_id;
 }
