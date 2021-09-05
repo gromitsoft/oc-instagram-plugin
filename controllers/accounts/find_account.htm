@@ -1,0 +1,48 @@
+<?php
+
+use GromIT\Instagram\Controllers\Accounts;
+
+/** @var Accounts $this */
+
+Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?= Backend::url('gromit/instagram/accounts') ?>">Аккаунты Instagram</a></li>
+    <li><?= e($this->pageTitle) ?></li>
+</ul>
+<?php Block::endPut() ?>
+
+<div class="layout">
+
+    <?= Form::open(['class' => 'layout']) ?>
+    <h3 class="form-title"><i class="icon octo-icon-plus"></i> Добавить аккаунт</h3>
+    <div class="layout-row">
+        <div class="form-group span-left is-required">
+            <label>Имя пользователя Instagram</label>
+            <input id="finder_username" name="username" type="text" value="" class="form-control" required/>
+        </div>
+
+        <div class="form-group span-left is-required">
+            <label>API-ключ</label>
+            <input id="finder_api_key"name="api_key" type="text" value="" class="form-control" required/>
+        </div>
+
+        <div class="form-group span-left">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onFindInstagramAccount"
+                    data-load-indicator="Ищем аккаунт"
+                    class="btn btn-default btn-lg btn-block">
+                    Найти аккаунт Instagram
+                </button>
+            </div>
+        </div>
+
+        <div id="finder_result" class="form-group span-left">
+            <?= $this->makePartial('partials/form/account_finder_result') ?>
+        </div>
+
+    </div>
+    <?= Form::close() ?>
+
+</div>

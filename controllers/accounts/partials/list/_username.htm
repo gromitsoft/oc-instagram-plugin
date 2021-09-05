@@ -1,0 +1,35 @@
+<?php
+
+use GromIT\Instagram\Models\Account;
+use System\Models\File;
+
+/** @var Account $record */
+/** @var File $avatar */
+
+?>
+
+<div class="account">
+
+
+    <div>
+        <?php if ($avatar = $record->avatar): ?>
+            <img class="account__avatar" src="<?= $avatar->getThumb('50', '50', ['mode' => 'crop']) ?>"/>
+        <?php else: ?>
+            <div class="account__avatar account__no-avatar">
+                &nbsp;
+            </div>
+        <?php endif ?>
+    </div>
+    <div>
+        <div class="text-bold">
+            @<?=$record->username?>
+        </div>
+        <div class="text-muted">
+            <?=$record->full_name?>
+        </div>
+        <div class="text-muted small">
+            API: *****<?=mb_substr($record->rapid_api_key, -5)?>
+        </div>
+    </div>
+
+</div>

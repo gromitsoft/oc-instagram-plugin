@@ -1,0 +1,23 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    username:
+        label: Аккаунт
+        type: partial
+        path: partials/list/username
+        sortable: false
+        searchable: false
+    instagram_id:
+        label: ID аккаунта
+        searchable: true
+    followed_by_count:
+        label: Подписчики
+        sortable: false
+    follows_count:
+        label: Подписки
+        sortable: false
+    media_count:
+        label: Медиа
+        sortable: false

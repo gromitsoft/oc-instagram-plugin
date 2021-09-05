@@ -1,0 +1,52 @@
+<?php if (isset($account) && !empty($account)): ?>
+    <div class="form-group span-left result">
+
+        <div class="account">
+            <div class="account__avatar">
+                <img
+                     src="data:image/jpg;base64,<?= base64_encode(file_get_contents($account['avatar'])) ?>">
+            </div>
+            <div>
+                <div class="text-bold">
+                    @<?= $account['username'] ?>
+                </div>
+                <div>
+                    <?= $account['full_name'] ?>
+                </div>
+                <div class="text-muted">
+                    ID <?= $account['instagram_id'] ?>
+                </div>
+            </div>
+        </div>
+        <div class="loading-indicator-container">
+            <button
+                type="button"
+                onclick="saveAccount()"
+                data-load-indicator="Подключаем"
+                class="btn btn-primary">
+                Подключить
+            </button>
+        </div>
+    </div>
+
+    <script>
+
+        function saveAccount() {
+            $.request('onSaveInstagramAccount', {
+                data: {
+                    'instagram_id': '<?=$account['instagram_id']?>',
+                    'username': '<?=$account['username']?>',
+                    'full_name': '<?=$account['full_name']?>',
+                    'external_url': '<?=$account['external_url']?>',
+                    'follows_count': '<?=$account['follows_count']?>',
+                    'followed_by_count': '<?=$account['followed_by_count']?>',
+                    'media_count': '<?=$account['media_count']?>',
+                    'rapid_api_key': '<?=$account['rapid_api_key']?>',
+                    'avatar': '<?=$account['avatar']?>',
+                },
+            })
+        }
+
+    </script>
+
+<?php endif ?>

@@ -1,0 +1,10 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    _account_finder:
+        type: partial
+        path: partials/form/account_finder
+    rapid_api_key:
+        label: API-key

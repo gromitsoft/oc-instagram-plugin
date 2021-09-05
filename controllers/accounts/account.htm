@@ -1,0 +1,80 @@
+<?php
+
+use GromIT\Instagram\Controllers\Accounts;
+use GromIT\Instagram\Models\Account;
+
+/** @var Accounts $this */
+/** @var Account $account */
+
+
+Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?= Backend::url('gromit/instagram/accounts') ?>">Аккаунты Instagram</a></li>
+    <li><?= e($this->pageTitle) ?></li>
+</ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <div class="form-preview account-preview">
+        <div class="account-block">
+            <div>
+                <img src="<?= $account->avatar->getThumb('150', '150', ['mode' => 'crop']) ?>">
+            </div>
+            <div>
+                <div class="username">
+                    <?= $account->username ?>
+                </div>
+                <div class="meta-info">
+                    <div>Публикаций: <b><?= $account->media_count ?></b></div>
+                    <div>Подписчиков: <b><?= $account->followed_by_count ?></b></div>
+                    <div>Подписок: <b><?= $account->follows_count ?></b></div>
+                </div>
+                <?php if ($account->full_name): ?>
+                    <div class="full_name">
+                        <?= $account->full_name ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($account->external_url): ?>
+                    <div class="external_url">
+                        <a href="<?= $account->external_url ?>" target="_blank"><?= $account->external_url ?></a>
+                    </div>
+                <?php endif; ?>
+                <div class="small text-muted m-b">
+                    API-key #<?= $account->rapid_api_key ?>
+                </div>
+                <?php if (!$account->medias->count()): ?>
+                    <div>
+                        <?= Form::open() ?>
+                        <div class="loading-indicator-container">
+                            <button
+                                class="btn btn-default"
+                                data-request="onSyncInstagramAccountMedias"
+                                data-request-data="account_id: <?= $account->id ?>"
+                                data-load-indicator="Забираем контент.."
+                            >
+                                Получить публикации
+                            </button>
+                        </div>
+                        <?= Form::close() ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="medias-result" class="medias-block">
+        <?= $this->makePartial('partials/form/medias_result', ['medias' => $account->medias]) ?>
+    </div>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p>
+        <a href="<?= $this->actionUrl('/') ?>" class="btn btn-default">
+            Назад к списку аккаунтов
+        </a>
+    </p>
+
+<?php endif ?>

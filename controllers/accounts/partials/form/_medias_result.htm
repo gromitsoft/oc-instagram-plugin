@@ -1,0 +1,19 @@
+<div class="medias-result">
+    <?php foreach ($medias as $media): ?>
+        <?php /** @var \GromIT\Instagram\Models\Media $media */ ?>
+        <div class="media-item">
+            <div class="media-image"
+                 style="background-image: url(<?= $media->image->getPath() ?>)"
+            >
+                <div class="media-info">
+                    <div>
+                        <i class="icon-heart-o"></i> <?= $media->likes_count ?>
+                    </div>
+                    <div>
+                        <i class="icon-comment-o"></i> <?= $media->comments_count ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
