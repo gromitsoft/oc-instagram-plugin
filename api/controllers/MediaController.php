@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 
 class MediaController extends Controller
 {
-    public function get(Request $request): JsonResponse
+    public function get($accountId, $limit = 12): JsonResponse
     {
         $medias = Media::query()
-            ->where('account_id', '=', $request->get('account_id'))
+            ->where('account_id', '=', $accountId)
             ->orderBy('created_at', 'desc')
-            ->limit($request->get('limit', 12))
+            ->limit($limit)
             ->get();
 
         $data = [];

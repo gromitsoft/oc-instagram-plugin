@@ -1,6 +1,5 @@
 <?php
 
-
 use GromIT\Instagram\Api\Controllers\MediaController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +11,6 @@ Route::group(
         ]
     ],
     static function () {
-        Route::get('get/{account_id}', [\GromIT\Instagram\Controllers\Accounts::class, 'getMedias']);
+        Route::get('get/{account_id}/{limit?}', [MediaController::class, 'get']);
     }
 );
