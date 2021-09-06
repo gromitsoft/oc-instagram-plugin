@@ -43,6 +43,7 @@ class Plugin extends PluginBase
                         ]));
                     }
                 }
+                \Log::info('Лента Instagram обновлена!');
             })->dailyAt('11:00');
     }
 
