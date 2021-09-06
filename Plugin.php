@@ -1,6 +1,10 @@
 <?php namespace GromIT\Instagram;
 
 use Backend;
+use Exception;
+use GromIT\Instagram\Actions\SyncMediaAction;
+use GromIT\Instagram\Dto\SyncMediaDto;
+use GromIT\Instagram\Models\Account;
 use System\Classes\PluginBase;
 
 /**
@@ -23,24 +27,23 @@ class Plugin extends PluginBase
         ];
     }
 
-    /**
-     * Register method, called when the plugin is first registered.
-     *
-     * @return void
-     */
-    public function register()
+    public function registerSchedule($schedule)
     {
+        $schedule->call(
 
-    }
+            /** @throws Exception */
 
-    /**
-     * Boot method, called right before the request route.
-     *
-     * @return array
-     */
-    public function boot()
-    {
+            function () {
 
+                $accounts = Account::query()->get();
+                if ($accounts->count()) {
+                    foreach ($accounts as $account) {
+                        SyncMediaAction::make()->execute(new SyncMediaDto([
+                            'account_id' => $account->id,
+                        ]));
+                    }
+                }
+            })->dailyAt('09:00');
     }
 
     public function registerSettings()
