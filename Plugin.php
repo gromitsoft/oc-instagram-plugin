@@ -43,7 +43,7 @@ class Plugin extends PluginBase
                         ]));
                     }
                 }
-            })->dailyAt('09:00');
+            })->dailyAt('11:00');
     }
 
     public function registerSettings()
