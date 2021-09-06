@@ -12,6 +12,6 @@ Route::group(
         ]
     ],
     static function () {
-        Route::get('get', [MediaController::class, 'get']);
+        Route::get('get/{account_id}', [\GromIT\Instagram\Controllers\Accounts::class, 'getMedias']);
     }
 );
