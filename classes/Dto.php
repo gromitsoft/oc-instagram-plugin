@@ -27,14 +27,14 @@ abstract class Dto implements Arrayable
         $properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
 
         $propertiesList = array_map(
-            static fn(ReflectionProperty $property) => $property->getName(),
+            static function (ReflectionProperty $property) {
+                return $property->getName();
+            },
             $properties
         );
 
         foreach ($data as $key => $value) {
             if (!in_array($key, $propertiesList, true)) {
-                // $className = get_class($this);
-                // throw new RuntimeException("Property $key does not exists in class $className.");
                 continue;
             }
 
@@ -49,12 +49,10 @@ abstract class Dto implements Arrayable
 
     /**
      * @param int $options
-     *
-     * @return false|string
-     * @throws \JsonException
+     * @return string
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
-        return json_encode($this->toArray(), JSON_THROW_ON_ERROR | $options);
+        return json_try_encode($this->toArray(), $options);
     }
 }

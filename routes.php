@@ -2,18 +2,16 @@
 
 
 use GromIT\Instagram\Api\Controllers\MediaController;
-use GromIT\Instagram\Api\Middleware\CorsMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix'     => 'api',
+        'prefix'     => 'instagram',
         'middleware' => [
             'web',
-            CorsMiddleware::class,
         ]
     ],
     static function () {
-        Route::get('instagram', [MediaController::class, 'get']);
+        Route::get('get', [MediaController::class, 'get']);
     }
 );

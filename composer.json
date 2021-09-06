@@ -10,7 +10,9 @@
     ],
     "require": {
         "composer/installers": "~1.0",
-        "restyler/instagram-php-scraper": "^1.0"
+        "restyler/instagram-php-scraper": "^1.0",
+        "daverandom/exceptional-json": "^1.0",
+        "ext-json": "*"
     },
     "config": {
         "preferred-install": "dist"
